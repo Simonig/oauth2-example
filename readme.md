@@ -9,8 +9,8 @@ their username and password with that service, if you want to read more about Oa
 First of all, we need to create our Google Project and create OAuth2 credentials.
 
 * Go to Google Cloud Platform
-* Create a new project or if you have already project select one.
-* Go to Credentials and create a new credentials choose it “OAuth client ID”
+* Create a new project or select one if you already have it.
+* Go to Credentials and create new credentials choosing  “OAuth client ID”
 * Add authorized redirect URL, for this example `localhost:8000/auth/google/callback`
 * Copy client_id and client secret
 
