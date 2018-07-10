@@ -1,17 +1,17 @@
 # Oauth2-example with Go
-Authentication is the most common part in any application. You can implement your own authentication system or you can use one of the many alternatives that exist, but in this case we going to use OAuth2.
+Authentication is the most common part in any application. You can implement your own authentication system or use one of the many alternatives that exist, but in this case we going to use OAuth2.
 
 OAuth is a specification that allows users to delegate access to their data without sharing
-their username and password with that service, if you want to read more about Oauth2 go to [here](https://oauth.net/2/).
+their username and password with that service, if you want to read more about Oauth2 go [here](https://oauth.net/2/).
  
  
 ## Config Google Project
-First of all, we need to create our Google Project and create OAuth2 credentials.
+First things first, we need to create our Google Project and create OAuth2 credentials.
 
 * Go to Google Cloud Platform
 * Create a new project or select one if you already have it.
-* Go to Credentials and create new credentials choosing  “OAuth client ID”
-* Add authorized redirect URL, for this example `localhost:8000/auth/google/callback`
+* Go to Credentials and and create a new one choosing  “OAuth client ID”
+* Add "authorized redirect URL", for this example `localhost:8000/auth/google/callback`
 * Copy client_id and client secret
 
 
