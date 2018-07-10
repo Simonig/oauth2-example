@@ -1,5 +1,5 @@
 # Oauth2-example with Go
-Authentication is the most common part in any application. You can implement your own authentication system or use one of the many alternatives that exist, but in this case we going to use OAuth2.
+Authentication is the most common part in any application. You can implement your own authentication system or use one of the many alternatives that exist, but in this case we are going to use OAuth2.
 
 OAuth is a specification that allows users to delegate access to their data without sharing
 their username and password with that service, if you want to read more about Oauth2 go [here](https://oauth.net/2/).
@@ -10,13 +10,13 @@ First things first, we need to create our Google Project and create OAuth2 crede
 
 * Go to Google Cloud Platform
 * Create a new project or select one if you already have it.
-* Go to Credentials and and create a new one choosing  “OAuth client ID”
+* Go to Credentials and then create a new one choosing  “OAuth client ID”
 * Add "authorized redirect URL", for this example `localhost:8000/auth/google/callback`
-* Copy client_id and client secret
+* Copy the client_id and client secret
 
 
 ## How OAuth2 works with Google
-The authorization sequence begins when your application redirects a browser to a Google URL; the URL includes query parameters that indicate the type of access being requested. Google handles the user authentication, session selection, and user consent. The result is an authorization code, which the application can exchange for an access token and a refresh token.
+The authorization sequence begins when your application redirects the browser to a Google URL; the URL includes query parameters that indicate the type of access being requested. Google handles the user authentication, session selection, and user consent. The result is an authorization code, which the application can exchange for an access token and a refresh token.
 
 The application should store the refresh token for future use and use the access token to access a Google API. Once the access token expires, the application uses the refresh token to obtain a new one.
 
@@ -25,7 +25,7 @@ The application should store the refresh token for future use and use the access
 ## Let's go to the code
 We will use the package "golang.org/x/oauth2" that provides support for making OAuth2 authorized and authenticated HTTP requests.
 
-Create a new project(folder) in your workdir in my case I will call 'oauth2-example', and we need to get the package of oauth2.
+Create a new project(folder) in your workdir in my case I will call it 'oauth2-example', and we need to include the package of oauth2.
 
 `go get golang.org/x/oauth2`
 
@@ -81,13 +81,13 @@ func New() http.Handler {
 }
 ```
 
-We use **http.ServeMux** to handler our endpoints, next we create the endpoint Root "/" for serving a simple template with a minimmum HTML&CSS for this example using 'http. http.FileServer', that template is 'index.html' and it is in the folder 'templates'.
+We use **http.ServeMux** to handle our endpoints, next we create the Root endpoint "/" for serving a simple template with a minimmum HTML&CSS in this example we use 'http. http.FileServer', that template is 'index.html' and is in the folder 'templates'.
 
-Also we create two endpoints for Oauth with google "/auth/google/login" and "/auth/google/callback" we remember when configured we our application in google? we had to put the callback url, this is.
+Also we create two endpoints for Oauth with Google "/auth/google/login" and "/auth/google/callback". Remember when we configured our application in the Google console? The callback url must be the same.
 
-Next, we create another file into handlers, we'll call it 'oauth_google.go', this file contains all logic to handler oauth with google in our application.
-
-We Declare var googleOauthConfig with auth.Config for communication with Google.
+Next, we create another file into handlers, we'll call it 'oauth_google.go', this file contains all logic to handle OAuth with Google in our application.
+https://www.grammarly.com/signin?utm_medium=internal&utm_source=signinHook
+We Declare the var googleOauthConfig with auth.Config to communicate with Google.
 
 Scopes: OAuth 2.0 scopes provide a way to limit the amount of access that is granted to an
 access token.
@@ -109,7 +109,7 @@ This handler creates a login link and redirects the user to it:
 
 
 AuthCodeURL receive state that is a token to protect the user from CSRF attacks. You must
-always provide a non-empty string and validate that it matches the the state query parameter on your redirect callback, It's advisable that this random for each request, for that we use a simple cookie.
+always provide a non-empty string and validate that it matches with the state query parameter on your redirect callback, It's advisable that this is randomly generated for each request, that's why we use a simple cookie.
 	
 ```go
 func oauthGoogleLogin(w http.ResponseWriter, r *http.Request) {
@@ -136,7 +136,7 @@ func generateStateOauthCookie(w http.ResponseWriter) string {
 
 ### Handler oauthGoogleCallback
 
-This handler check the state is equals to oauthStateCookie, and pass code to function **getUserDataFromGoogle**.
+This handler check if the state is equals to oauthStateCookie, and pass the code to the function **getUserDataFromGoogle**.
 
 ```go
 func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
